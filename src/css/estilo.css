@@ -1,0 +1,651 @@
+html {
+    box-sizing: border-box;
+    padding: 0; 
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+.header{
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contenedor{
+
+    width: 100%;
+    
+}
+
+ header .inicio  button {
+
+    width: 400px;
+    height: 100px;
+    background-color: rgb(126, 126, 253);
+}
+
+.loader {
+    position: fixed; /* Para que cubra toda la pantalla y se quede fijo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.spinner {
+    border: 8px solid #f3f3f3; /* Fondo del spinner */
+    border-top: 8px solid #3498db; /* Color que gira */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.pie{
+
+
+    background-color: rgb(32, 28, 28);
+    width: 100%;
+    display: flex;
+    margin: auto;
+    height: auto;
+}
+
+
+
+.card-efecto {
+    transition: all 0.3s ease; 
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.card-efecto:hover {
+    transform: translateY(-10px); /* Levitar */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2) !important; /* Sombra profunda */
+    cursor: pointer;
+    border-color: transparent;
+}
+
+.card-efecto:hover .card-img-top {
+    transform: scale(1.03); /* Zoom suave */
+    transition: transform 0.3s ease;
+}
+
+/* Evitar que la imagen se salga al hacer zoom */
+.card-efecto {
+    overflow: hidden; 
+}
+
+/* --- Estilos del Footer --- */
+.pie {
+    background-color: #1a1a1a !important; 
+    color: #d1d1d1 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pie h5 {
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.pie p a {
+    font-size: 0.95rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.pie p a:hover {
+    color: #007bff !important; /* El color primario de tu marca */
+    padding-left: 5px; /* Pequeño efecto de desplazamiento */
+}
+
+.pie .fa {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.pie .fa:hover {
+    transform: translateY(-3px);
+    color: #007bff !important;
+}
+
+/* Para asegurar que el footer no se pegue al contenido de arriba */
+main, #resultados {
+    min-height: 60vh; /* Asegura que el footer se mantenga abajo aunque haya pocos artículos */
+}
+
+/* --- Estilo del buscador centrado --- */
+.buscador-unificado {
+    transition: all 0.3s ease;
+    border: 1px solid #eee !important;
+}
+
+.buscador-unificado:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+}
+
+.buscador-unificado .form-control, 
+.buscador-unificado .form-select {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+}
+
+.buscador-unificado .form-control:focus, 
+.buscador-unificado .form-select:focus {
+    background-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    outline: none;
+    border: 1px solid #0d6efd !important;
+}
+
+/* Ajuste para que los labels no queden pegados al borde en móvil */
+@media (max-width: 768px) {
+    .buscador-unificado {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+/* Estilos para el sobre de notificaciones */
+.nav-item .fa-envelope-o {
+    transition: color 0.3s ease;
+}
+
+.nav-item:hover .fa-envelope-o {
+    color: #007bff; /* Color azul al pasar el ratón */
+}
+
+#notif-badge {
+    /* Asegura que el badge sea un círculo perfecto si hay pocos números */
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white; /* Un borde blanco lo hace resaltar sobre el fondo */
+}
+
+/* Difuminar ligeramente la imagen si está vendido */
+.card-vendido img {
+    filter: grayscale(1) opacity(0.6);
+}
+
+.badge {
+    z-index: 10;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+}
+
+/* --- Estilos para las Etiquetas de Estado --- */
+.badge-estado {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px; /* Bordes muy redondeados */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    backdrop-filter: blur(4px); /* Efecto cristal */
+}
+
+/* Colores personalizados */
+.badge-disponible {
+    background-color: rgba(40, 167, 69, 0.85) !important; /* Verde */
+    color: white;
+}
+
+.badge-reservado {
+    background-color: rgba(255, 193, 7, 0.9) !important; /* Ámbar */
+    color: #212529;
+}
+
+.badge-vendido {
+    background-color: rgba(220, 53, 69, 0.85) !important; /* Rojo */
+    color: white;
+}
+
+/* Efecto para la tarjeta cuando está vendido */
+.card-vendido {
+    filter: grayscale(0.4);
+}
+
+.card-vendido img {
+    filter: sepia(0.2) opacity(0.7);
+}
+
+/* Estilo para la botonera de gestión (dueño) */
+.gestion-container {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px dashed #dee2e6;
+}
+
+.btn-check:checked + .btn-outline-success { background-color: #28a745; color: white; }
+.btn-check:checked + .btn-outline-warning { background-color: #ffc107; color: black; }
+.btn-check:checked + .btn-outline-danger { background-color: #dc3545; color: white; }
+
+#contenedor-busqueda {
+    transition: all 0.4s ease;
+    z-index: 1020; /* Para que quede por encima al hacer scroll */
+    background-color: white !important;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Efecto para que no ocupe nada de espacio extra */
+.sticky-top {
+    top: 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.form-control-sm, .form-select-sm {
+    height: calc(1.5em + 0.5rem + 2px);
+}
+#carouselExampleInterval, #contenedor-busqueda {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.buscador-fijo {
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    background: white !important;
+    padding: 15px !important;
+    border-bottom: 2px solid #0dcaf0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+@media (max-width: 991px) {
+    #carouselExampleInterval {
+        display: none !important;
+    }
+}
+
+/* Mejora de tu clase card-efecto */
+.card-efecto {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: #ffffff;
+}
+
+.card-efecto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Suavizar tu clase bg-gradient cuando se usa con bg-dark */
+.bg-dark.bg-gradient {
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%) !important;
+    border: none !important;
+}
+
+/* Ajuste para que el texto de categoría no quede pegado al borde */
+.text-primary.fw-bold.mt-auto {
+    font-size: 0.85rem;
+}
+
+/* Estilo para los bordes internos que usas */
+.card-body .border {
+    border-color: #edf2f7 !important;
+    background-color: #f8f9fa;
+}
+
+/* Ajuste del botón para que el badge no lo deforme */
+.btn-primary {
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+/* Contenedor relativo para que el sello se posicione bien */
+.card-vendido {
+    position: relative;
+    filter: grayscale(40%); /* Desatura un poco los colores */
+}
+
+/* Capa de sombreado */
+.card-vendido::before {
+    content: "CAMBIADO";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Sombreado oscuro */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    z-index: 10;
+    letter-spacing: 2px;
+    backdrop-filter: blur(1.5px); /* Efecto de desenfoque moderno */
+}
+
+/* Deshabilitar clics en elementos específicos si está vendido */
+.disabled-interaction {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Botón Principal de Subida */
+.btn-upload-item {
+    background: #ffffff;
+    border: 2px solid #0d6efd; /* Color corporativo TrueChange */
+    color: #0d6efd;
+    border-radius: 50px; /* Estilo píldora */
+    padding: 6px 20px 6px 8px; /* Espacio extra a la derecha */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Posicionamiento Central */
+.header-center-action {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* El Botón "TrueChange Main" */
+.btn-truechange-main {
+    background: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+/* Efecto de Brillo (Flare) */
+.flare {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: 0.5s;
+    z-index: 1;
+}
+
+/* Interacciones (Hover) */
+.btn-truechange-main:hover {
+    transform: translateX(0) scale(1.05); /* El translate lo hereda del padre o se ajusta */
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.5);
+    color: white;
+}
+
+.btn-truechange-main:hover .flare {
+    left: 150%;
+    transition: 0.7s;
+}
+
+/* Animación sutil para el icono de intercambio */
+.animate-spin-slow {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .btn-truechange-main span {
+        display: none; /* Solo queda el icono en pantallas pequeñas */
+    }
+    .btn-truechange-main {
+        padding: 10px 15px;
+    }
+}
+.btn-upload-item {
+    animation: pulse-soft 2s infinite;
+}
+
+/* CONTENEDOR DE LOS BOTONES */
+.categorias-scroll {
+    display: flex;
+    flex-wrap: nowrap !important; /* IMPORTANTE: Evita que bajen de línea */
+    overflow-x: auto;             /* Habilita scroll horizontal */
+    gap: 10px;                    /* Espacio entre botones */
+    padding: 10px 0;              /* Espacio arriba/abajo */
+    width: 100%;                  /* Ocupa todo el ancho disponible */
+    
+    /* Scroll suave para móviles */
+    -webkit-overflow-scrolling: touch; 
+    /* Ocultar barra de scroll (estético) */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+/* Ocultar barra scroll en Chrome/Safari */
+.categorias-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ESTILO DEL BOTÓN (Píldora) */
+.btn-cat {
+    /* Resetear estilos feos por defecto del navegador */
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    
+    /* Forma y texto */
+    border-radius: 50px;         /* Borde redondo completo */
+    padding: 6px 18px;           
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;         /* CRUCIAL: El texto nunca se parte */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* HOVER (Al pasar el mouse) */
+.btn-cat:hover {
+    background-color: #f8f9fa;
+    border-color: #0d6efd;       /* Azul Bootstrap */
+    color: #0d6efd;
+}
+
+/* ACTIVE (Botón seleccionado) */
+.btn-cat.active {
+    background-color: #0d6efd;   /* Fondo azul */
+    color: #fff;                 /* Texto blanco */
+    border-color: #0d6efd;
+    box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+}
+
+/* Estilo para la barra de búsqueda */
+.navbar {
+    padding: 0.8rem 0;
+    transition: all 0.3s ease;
+}
+
+.input-group .form-select:focus, 
+.input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+    z-index: 3;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #0d6efd, #004db3);
+    border: none;
+}
+
+/* Ajuste responsive para el selector */
+@media (max-width: 576px) {
+    #searchCategory {
+        max-width: 100px;
+        font-size: 0.85rem;
+    }
+}
+/* Estilos para el buscador Pro */
+.buscador-pro {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efecto al hacer clic dentro del buscador */
+.buscador-pro:focus-within {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+    border-color: #0d6efd !important;
+}
+
+/* Evitar bordes azules feos por defecto de bootstrap al seleccionar */
+.buscador-pro .form-control:focus,
+.buscador-pro .form-select:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* Ocultar el texto de categoría en móviles muy pequeños para dar espacio al input */
+@media (max-width: 576px) {
+    #searchCategory {
+        max-width: 120px !important;
+        font-size: 0.85rem;
+    }
+}
+
+.chat-nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 14px;
+    margin-right: 14px;
+    flex-shrink: 0;
+}
+
+.chat-nav-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 20px;
+    border-radius: 16px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 22px rgba(13, 110, 253, 0.22);
+    transition: all 0.25s ease;
+}
+
+.chat-nav-button:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(13, 110, 253, 0.30);
+    background: linear-gradient(135deg, #1c78ff, #0a58ca);
+}
+
+.chat-nav-button-icon {
+    font-size: 1.45rem;
+    color: #fff;
+    line-height: 1;
+}
+
+.chat-nav-button-text {
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.chat-nav-button-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff5a6e, #dc3545);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid #fff;
+    box-shadow: 0 6px 14px rgba(220, 53, 69, 0.28);
+}
+
+@media (max-width: 768px) {
+    .chat-nav-wrapper {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .chat-nav-button {
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: 14px;
+        gap: 8px;
+    }
+
+    .chat-nav-button-icon {
+        font-size: 1.2rem;
+    }
+
+    .chat-nav-button-text {
+        font-size: 0.9rem;
+    }
+
+    .chat-nav-button-badge {
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.66rem;
+        top: -5px;
+        right: -5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .chat-nav-button-text {
+        display: none;
+    }
+
+    .chat-nav-button {
+        width: 46px;
+        min-width: 46px;
+        height: 46px;
+        padding: 0;
+        border-radius: 14px;
+    }
+
+    .chat-nav-button-icon {
+        font-size: 1.25rem;
+    }
+}
