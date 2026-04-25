@@ -122,17 +122,22 @@ function aplicarFiltro(event) {
     const valorFiltro = 'titulo';
 
 
-
-    // El filtro de texto debe ser insensible a mayúsculas/minúsculas
-    const valorLowerCase = campoFiltro.toLowerCase();
-
+    // El filtro de texto debe ser insensible a mayúsculas/minúsculas y a los acentos
+    
+    const valorLowerCase = eliminarAcentos(campoFiltro);
     // 1. Aplicar el filtro a los datos cargados previamente
     const datosFiltrados = todosLosDatos.filter(item => {
-        const itemValue = item[valorFiltro];
+        const itemValue = item[valorFiltro].replace(/[áàÁÀ]/g, "a")
+    .replace(/[ÉÈéè]/g, "e")
+    .replace(/[ÍÌíì]/g, "i")
+    .replace(/[ÓÒóó]/g, "o")
+    .replace(/[ÚÙúù]/g, "u");
 
         if (typeof itemValue === 'string') {
+            itemValue = itemValue.toLocaleLowerCase();
+            console.log(itemValue);
             // Filtrado de texto (insensible a mayúsculas/minúsculas y busca subcadenas)
-            return itemValue.toLowerCase().includes(valorLowerCase);
+            return itemValue.includes(valorLowerCase);
         }
 
         // Si no es un string  (o si el campo no existe), no lo incluimos
@@ -152,7 +157,7 @@ function mostrarTodos() {
 
 
 function mostrarDatos(datos, contenedor, campo = null, valor = null) {
-
+    
     // 1. Limpiar el contenedor de tarjetas
     contenedor.innerHTML = "";
 
@@ -259,13 +264,13 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
             <p class="card-text text-truncate text-muted small mb-3">${item.descripcion}</p>
             
             <p class="text-primary fw-bold mt-auto mb-2 small text-uppercase">
-                ${item.categoria}
+            ${item.categoria}
             </p>
-
-             <p class="text-primary fw-bold mt-auto mb-2 small text-uppercase">
-                ${item.estado}
+            
+            <p class="text-primary fw-bold mt-auto mb-2 small text-uppercase">
+            ${item.estado}
             </p>
-
+            
             <div class="border-0 p-3 mb-2 bg-dark bg-gradient rounded-3 shadow-sm">
                 <h6 class="text-white-50 small mb-1" style="font-size: 0.7rem;">Cambio por...</h6>
                 <p class="text-white fw-bold mb-0 small text-truncate">${item.cambio}</p>
@@ -369,7 +374,7 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
         contenedorModales.innerHTML += modalHtml;   // El modal va al fondo del body
         contador++;
     });
-
+    
 }
 
 // Iniciar la carga de datos al cargar la página
@@ -382,6 +387,16 @@ function mostrarNotificacion() {
     toast.show();
 }
 
+function eliminarAcentos(texto){
+
+    var textoNuevo = texto.replace(/[ÁÀáàâ]/g , "a")
+    .replace(/[ÉÈéèê]/g , "e")
+    .replace(/[ÍÌíìî]/g , "i")
+    .replace(/[ÓÒóòô]/g , "o")
+    .replace(/[ÚÙúùû]/g , "u");
+    return(textoNuevo.toLowerCase());
+
+}
 function reproducirSonido() {
     const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3');
     audio.play();
@@ -415,17 +430,9 @@ document.addEventListener('click', function (e) {
                 console.error('Error al guardar sesión:', error);
                 alert('No se pudo iniciar el chat. Intentalo de nuevo.');
             });
-    }
-
-   /* fetch('../../public/Chat/verificar_notifications.php')
-        .then(res => res.json())
-        .then(data => {
-            if (data.count > 0) {
-                // Mostrar el Toast que ya tienes en tu HTML o un punto rojo en el icono de mensajes
-                const toast = new bootstrap.Toast(document.getElementById('liveToast'));
-                toast.show();
-            }
-        }); */
+        }
+        
+        
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -632,9 +639,10 @@ function aplicarFiltros() {
     // A) FILTRO POR TÍTULO O DESCRIPCIÓN (Buscador General)
     if (inputGeneral && inputGeneral.value.trim() !== "") {
         const texto = inputGeneral.value.toLowerCase();
+        const textoNuevo = eliminarAcentos(texto);
         resultados = resultados.filter(item =>
-            item.titulo.toLowerCase().includes(texto) ||
-            item.descripcion.toLowerCase().includes(texto)
+            eliminarAcentos(item.titulo).includes(textoNuevo) ||
+            eliminarAcentos(item.descripcion).includes(textoNuevo)
         );
     }
 
@@ -642,19 +650,19 @@ function aplicarFiltros() {
     // Asumimos que la info de qué quiere cambio está en la descripción o un campo específico
     if (inputCambio && inputCambio.value.trim() !== "") {
         const textoCambio = inputCambio.value.toLowerCase();
+        const textoCambioNuevo= eliminarAcentos(textoCambio)
         resultados = resultados.filter(item => {
-            // Buscamos palabras clave como "cambio por", "busco", o si tienes un campo 'preferencia_cambio'
-            // Si tienes un campo especifico en tu JSON úsalo aquí: item.preferencia_cambio
-            const contenido = item.cambio.toLowerCase();
-            return contenido.includes(textoCambio);
+            const contenido = eliminarAcentos(item.cambio);
+            return contenido.includes(textoCambioNuevo);
         });
     }
 
     if (inputCiudad && inputCiudad.value.trim() !== "") {
         const textoCiudad = inputCiudad.value.toLowerCase();
+        const textoCiudadNuevo= eliminarAcentos(textoCiudad);
         resultados = resultados.filter(item => {
-            const ciudad = item.ciudad.toLowerCase();
-            return ciudad.includes(textoCiudad);
+            const ciudad = eliminarAcentos(item.ciudad);
+            return ciudad.includes(textoCiudadNuevo);
         });
     }
 
@@ -912,20 +920,21 @@ function verOpiniones(usuarioId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('btn-valoraciones');
-
+if (usuarioLogueadoId !== null){
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         const miId = e.target.getAttribute('data-id');
         verOpiniones(miId);
-    });
+  })};
 });
 document.addEventListener('DOMContentLoaded', function () {
     const contenedor = document.getElementById('contenedor-busqueda');
     const carrusel = document.getElementById('carouselExampleInterval');
     const seccionArticulos = document.getElementById('articulos');
-    const titulo = contenedor.querySelector('h3');
+    //const titulo = contenedor.querySelector('h3');
+    if (usuarioLogueadoId !== null){
     const campos = contenedor.querySelectorAll('.campo-busqueda');
-
+    
     const inputGeneral = document.getElementById('buscador-general');
     const inputCambio = document.getElementById('buscador-cambio');
     const inputCiudad = document.getElementById('buscador-ciudad');
@@ -933,7 +942,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const padreOriginal = contenedor.parentNode;
     const siguienteHermanoOriginal = contenedor.nextSibling;
-
+    }
     let modoCompactoActivo = false;
 
     function transformarBuscador(inputActivo) {
@@ -970,7 +979,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         modoCompactoActivo = true;
     }
-
+    
     function restaurarOriginal() {
         if (!modoCompactoActivo) return;
 
@@ -1014,11 +1023,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
+if (usuarioLogueadoId !== null){
 const $botonPerfil = document.getElementById('botonPerfil');
 
 $botonPerfil.addEventListener('click', mostrarPerfil());
-
+}
 function mostrarPerfil() {
 
     const datos = document.getElementById('idPerfil');

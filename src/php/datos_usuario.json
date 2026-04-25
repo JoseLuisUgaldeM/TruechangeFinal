@@ -22,7 +22,7 @@
         "fecha_venta": null,
         "articulo_id": 105,
         "ruta_foto": "..\/imagenes\/uploads\/69e8efc658e8c.jpg",
-        "valoracion_media": "5.0000"
+        "valoracion_media": "4.0000"
     },
     {
         "id": 91,
@@ -47,7 +47,7 @@
         "fecha_venta": null,
         "articulo_id": 106,
         "ruta_foto": "..\/imagenes\/uploads\/69e8f0fc5a1b0.jpg",
-        "valoracion_media": "5.0000"
+        "valoracion_media": "4.0000"
     },
     {
         "id": 92,
@@ -66,10 +66,10 @@
         "categoria": "Coleccionismo",
         "estado": "nuevo",
         "fecha_publicacion": "2026-04-22 18:13:22",
-        "estadoArticulo": "reservado",
-        "receptor_id": null,
+        "estadoArticulo": "vendido",
+        "receptor_id": 36,
         "cambio": "Ordenador portatil",
-        "fecha_venta": null,
+        "fecha_venta": "2026-04-25",
         "articulo_id": 107,
         "ruta_foto": "..\/imagenes\/uploads\/69e8f3a21ef2c.jpg",
         "valoracion_media": "0.0000"

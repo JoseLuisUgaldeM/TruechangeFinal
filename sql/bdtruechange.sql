@@ -16,8 +16,7 @@
 
 
 -- Volcando estructura de base de datos para bdtruechange
-CREATE DATABASE IF NOT EXISTS `bdtruechange` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `bdtruechange`;
+
 
 -- Volcando estructura para tabla bdtruechange.articulos
 CREATE TABLE IF NOT EXISTS `articulos` (
