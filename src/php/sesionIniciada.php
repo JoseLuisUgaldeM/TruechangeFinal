@@ -387,7 +387,7 @@ if ($_SESSION['inicioSesion'] == true) {
         </div>
         <!--  Añadimos las cards con los articulos guardados-->
 
-        <div class="container my-5 contenedor1" id="articulos">
+        <div class="container my-5 contenedor1 row" id="articulos">
             <h1 id="titulo1">Artículos</h1>
             <div class="row" id="resultados">
             </div>
