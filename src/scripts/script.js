@@ -931,18 +931,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const contenedor = document.getElementById('contenedor-busqueda');
     const carrusel = document.getElementById('carouselExampleInterval');
     const seccionArticulos = document.getElementById('articulos');
-    //const titulo = contenedor.querySelector('h3');
-    if (usuarioLogueadoId !== null){
+    if (usuarioLogueadoId != null){
+    const titulo = contenedor.querySelector('h3');
+}
     const campos = contenedor.querySelectorAll('.campo-busqueda');
-    
     const inputGeneral = document.getElementById('buscador-general');
     const inputCambio = document.getElementById('buscador-cambio');
     const inputCiudad = document.getElementById('buscador-ciudad');
     const selectOrden = document.getElementById('filtro-orden');
-
+    
     const padreOriginal = contenedor.parentNode;
     const siguienteHermanoOriginal = contenedor.nextSibling;
-    }
+    
     let modoCompactoActivo = false;
 
     function transformarBuscador(inputActivo) {
