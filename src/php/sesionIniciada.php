@@ -537,7 +537,8 @@ if ($_SESSION['inicioSesion'] == true) {
                         <h5 class="text-uppercase mb-4 font-weight-bold text-primary">Ayuda</h5>
                         <p><a href="../../public/funcionamiento.html" class="text-white text-decoration-none">Cómo funciona</a></p>
                         <p><a href="../../public/normas.html" class="text-white text-decoration-none">Reglas y normas</a></p>
-                        <p><a href="#" class="text-white text-decoration-none">Contacto</a></p>
+                        <p><a href="../../public/contacto.html" class="text-white text-decoration-none">Contacto</a></p>
+                        <p><a href="../../public/test.html" class="text-white text-decoration-none">Developers</a></p>
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
