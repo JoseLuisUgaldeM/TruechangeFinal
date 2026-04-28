@@ -13,7 +13,7 @@ require_once "crearFicheroJson.php";
 
 session_start();
 
-if ($_SESSION['inicioSesion'] == true) {
+if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
 
     $usuario = new Usuario($database);
 

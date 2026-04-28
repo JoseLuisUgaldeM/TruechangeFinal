@@ -67,6 +67,18 @@
         <?php if (isset($_GET['borrado']) && $_GET['borrado'] === 'error') { ?>
             <div class="alert alert-danger">
                 Error al borrar los datos de prueba.
+          
+        <?php } ?>
+
+         <?php if (isset($_GET['datos']) && $_GET['datos'] === 'ok') { ?>
+            <div class="alert alert-success">
+                Datos de prueba cargados correctamente.
+            </div>
+        <?php } ?>
+
+        <?php if (isset($_GET['datos']) && $_GET['datos'] === 'error') { ?>
+            <div class="alert alert-danger">
+                Error al cargar los datos de prueba.
             </div>
         <?php } ?>
         <div class="card card-pruebas mb-4">

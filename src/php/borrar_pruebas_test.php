@@ -37,7 +37,7 @@ try {
                 $stmt->execute([$idArticulo]);
             }
 
-            // IMPORTANTE: borrar reseñas donde participa ese usuario
+            // Borrar reseñas donde participa ese usuario
             $stmt = $db->prepare("DELETE FROM reseñas WHERE emisor_id = ? OR receptor_id = ?");
             $stmt->execute([$idUsuario, $idUsuario]);
 
