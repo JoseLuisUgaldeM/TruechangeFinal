@@ -28,7 +28,7 @@ try {
             password_hash("1234", PASSWORD_DEFAULT),
             $u[4],
             $u[5],
-            "../imagenes/default.png"
+            "../imagenes/uploads/default.png"
         ]);
     }
 

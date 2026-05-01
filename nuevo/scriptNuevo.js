@@ -14,7 +14,7 @@ if (usuarioLogueadoId !== null) {
 let mensajesDetectados = 0;
 
 function verificarNuevosMensajes() {
-    fetch('../../public/Chat/check_notifications.php')
+    fetch('../../public/conversacion/check_notifications.php')
         .then(res => res.json())
         .then(data => {
             const badge = document.getElementById('notif-badge');
@@ -98,7 +98,11 @@ function filtrarPorCategoria(event) {
         if (typeof itemValue === 'string') {
             // Filtrado de texto (insensible a mayúsculas/minúsculas y busca subcadenas)
             return itemValue.toLowerCase().includes(valorLowerCase);
-        } 
+        } else if (typeof itemValue === 'number' && !isNaN(parseFloat(valorLowerCase))) {
+            // Filtrado de números (ej. para precios)
+            // Esto busca coincidencias exactas con el número introducido.
+            return itemValue === parseFloat(valorLowerCase);
+        }
 
 
         // Si no es un string ni un número (o si el campo no existe), no lo incluimos
@@ -112,33 +116,33 @@ function filtrarPorCategoria(event) {
 /**
  * Función que se ejecuta al hacer clic en "Aplicar Filtro".
 */
-
 function aplicarFiltro(event) {
     event.preventDefault();
-    const campoFiltro = document.getElementById('campoCategoria').value;
+    const campoValor = document.getElementById('campoFiltro').value;
     const valorFiltro = 'titulo';
 
 
-
-    // El filtro de texto debe ser insensible a mayúsculas/minúsculas
+    // El filtro de texto debe ser insensible a mayúsculas/minúsculas y a los acentos
+    
     const valorLowerCase = eliminarAcentos(campoFiltro);
-    console.log(valorFiltro);
     // 1. Aplicar el filtro a los datos cargados previamente
     const datosFiltrados = todosLosDatos.filter(item => {
-        const itemValue1= item[valorFiltro];
-        const itemValue = eliminarAcentos(itemValue1);
+        const itemValue = item[valorFiltro];
+
+
         if (typeof itemValue === 'string') {
+            itemValue = eliminarAcentos(itemValue);
+            console.log(itemValue);
             // Filtrado de texto (insensible a mayúsculas/minúsculas y busca subcadenas)
-            return itemValue.toLowerCase().includes(valorLowerCase);
-        } 
+            return itemValue.includes(valorLowerCase);
+        }
 
-
-        // Si no es un string ni un número (o si el campo no existe), no lo incluimos
+        // Si no es un string  (o si el campo no existe), no lo incluimos
         return false;
     });
 
     // 2. Mostrar los resultados
-    mostrarDatos(datosFiltrados, contenedorResultadosFiltrados, campoFiltro, valorFiltro);
+    mostrarDatos(datosFiltrados, contenedorResultados, campoFiltro, valorFiltro);
 }
 
 /**
@@ -168,13 +172,7 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
 
     if (datos.length === 0) {
 
-        contenedor.innerHTML =`
-                <div class="col-12 text-center my-5 py-5 w-100">
-                    <i class="fa fa-search fa-3x text-muted mb-3 opacity-25"></i>
-                    <h4 class="text-secondary fw-bold">No se han encontrado artículos</h4>
-                    <p class="text-muted">Prueba a buscar con otras palabras o cambia la categoría.</p>
-                </div>
-            `;
+        contenedor.innerHTML = `<div class="alert alert-warning col-12" role="alert">No se encontraron artículos.</div>`;
         return;
     }
 
@@ -221,7 +219,7 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
         } else {
             // CASO C: Estoy logueado y el anuncio es de otro
             botonMensajeHtml = `
-               <button type="button" class="btn btn-primary btn-chat btn-enviar-id" data-id="${item.usuario_id}">Enviar mensaje</button>`
+               <button type="button" class="btn btn-primary btn-conversacion btn-enviar-id" data-id="${item.usuario_id}">Enviar mensaje</button>`
 
         }
 
@@ -340,9 +338,9 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
                                     <h6 class="text-muted small mb-1">Publicado</h6>
                                     <span class="text-dark fw-bold">${imprimir}</span>
                                 </div>
-                                <div class="bg-light p-3 rounded-3 border-start border-info border-4 shadow-sm">
-                                    <h6 class="text-muted small mb-1">Lugar</h6>
-                                    <span class="text-dark fw-bold">${item.ciudad}</span>
+                                  <div class="bg-light p-3 rounded-3 border-start border-info border-4 shadow-sm">
+                                    <h6 class="text-muted small mb-1">Cambio por:</h6>
+                                    <span class="text-dark fw-bold">${item.cambio}</span>
                                 </div>
                             </div>
                         </div>
@@ -366,7 +364,7 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
             </div>
 
             <div class="modal-footer border-0 p-4 pt-0">
-                <button type="button" class="btn btn-outline-secondary px-4 btn-chat" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-secondary px-4 rounded-pill" data-bs-dismiss="modal">Cerrar</button>
                 ${botonMensajeHtml} </div>
         </div>
     </div>
@@ -413,7 +411,7 @@ document.addEventListener('click', function (e) {
         const vendedorId = e.target.getAttribute('data-id');
 
         // 2. Enviar el ID a PHP
-        fetch('../../public/Chat/db_config.php', {
+        fetch('../../public/conversacion/db_config.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -427,11 +425,11 @@ document.addEventListener('click', function (e) {
             .then(data => {
                 console.log('Sesión actualizada:', data);
                 // 3. AHORA SÍ, redirigimos después de confirmar el éxito
-                window.location.href = '../../public/Chat/chat.php';
+                window.location.href = '../../public/conversacion/conversacion.php';
             })
             .catch(error => {
                 console.error('Error al guardar sesión:', error);
-                alert('No se pudo iniciar el chat. Intentalo de nuevo.');
+                alert('No se pudo iniciar el conversacion. Intentalo de nuevo.');
             });
         }
         
@@ -725,7 +723,7 @@ function cargarPosiblesCompradores() {
     select.innerHTML = '<option disabled selected>Cargando...</option>';
 
 
-    fetch('../php/obtener_usuarios_chat.php')
+    fetch('../php/obtener_usuarios_conversacion.php')
         .then(res => res.json())
         .then(usuarios => {
             console.log(usuarios);
@@ -932,7 +930,6 @@ if (usuarioLogueadoId !== null){
 });
 document.addEventListener('DOMContentLoaded', function () {
     const contenedor = document.getElementById('contenedor-busqueda');
-    if(!contenedor) return;
     const carrusel = document.getElementById('carouselExampleInterval');
     const seccionArticulos = document.getElementById('articulos');
     if (usuarioLogueadoId != null){
@@ -1100,8 +1097,8 @@ function aplicarFiltroYcategoria(event) {
 
     // 2. Obtener los valores del select y del input
     const categoria = document.getElementById('searchCategory').value;
-    const texto1 = document.getElementById('campoFiltro').value.toLowerCase().trim();
-    const texto= eliminarAcentos(texto1);
+    const texto = document.getElementById('campoFiltro').value.toLowerCase().trim();
+
     // 3. Filtrar usando el array principal que tienes (todosLosDatos)
     const resultadosFiltrados = todosLosDatos.filter(articulo => {
         
@@ -1111,7 +1108,7 @@ function aplicarFiltroYcategoria(event) {
 
         // Condición 2: Comprobar el texto
         // Pasa si el nombre o la descripción contienen el texto escrito en el input
-        const coincideTexto = eliminarAcentos(articulo.titulo).includes(texto) || 
+        const coincideTexto = articulo.nombre.toLowerCase().includes(texto) || 
                               articulo.descripcion.toLowerCase().includes(texto);
 
         // Un artículo solo se muestra si cumple AMBAS condiciones
@@ -1128,7 +1125,7 @@ function aplicarFiltroYcategoria(event) {
             // Utilizamos tu función original que pinta los artículos
             mostrarDatos(resultadosFiltrados, contenedor);
         } else {
-            
+            // Mensaje elegante si no hay coincidencias
             contenedor.innerHTML = `
                 <div class="col-12 text-center my-5 py-5 w-100">
                     <i class="fa fa-search fa-3x text-muted mb-3 opacity-25"></i>

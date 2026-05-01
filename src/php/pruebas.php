@@ -58,7 +58,9 @@
 
     <main class="container my-5">
 
-        <?php if (isset($_GET['borrado']) && $_GET['borrado'] === 'ok') { ?>
+        <?php
+        session_start();
+         if (isset($_GET['borrado']) && $_GET['borrado'] === 'ok') { ?>
             <div class="alert alert-success">
                 Datos de prueba borrados correctamente.
             </div>

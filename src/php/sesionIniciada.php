@@ -13,7 +13,7 @@ require_once "crearFicheroJson.php";
 
 session_start();
 
-if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
+if ((isset($_SESSION['inicioSesion'])) && ($_SESSION['inicioSesion'] == true)) {
 
     $usuario = new Usuario($database);
 
@@ -44,7 +44,7 @@ if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
 
     <head>
         <link rel="icon" href="../imagenes/icono_proyecto.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../imagenes/icono_proyecto.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../imagenes/icono_proyecto.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
             integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -309,19 +309,19 @@ if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
                         </div>
                     </form>
                 </div>
-                
-                
-                
+
+
+
                 <div class="chat-nav-wrapper ms-3 me-3">
-    <a class="chat-nav-button" href="../../public/Chat/listado_chats.php" title="Mensajes">
-        <i class="fa fa-envelope-o chat-nav-button-icon"></i>
-        <span class="chat-nav-button-text">Mensajes</span>
-        <span id="notif-badge" class="chat-nav-button-badge">0</span>
-    </a>
-</div>
-                
-                
-            </div>
+                    <a class="chat-nav-button" href="../../public/Chat/listado_chats.php" title="Mensajes">
+                        <i class="fa fa-envelope-o chat-nav-button-icon"></i>
+                        <span class="chat-nav-button-text">Mensajes</span>
+                        <span id="notif-badge" class="chat-nav-button-badge">0</span>
+                    </a>
+                </div>
+
+
+        </div>
         </div>
         </nav>
 
@@ -387,7 +387,7 @@ if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
         </div>
         <!--  Añadimos las cards con los articulos guardados-->
 
-        <div class="container my-5 contenedor1 row" id="articulos">
+        <div class="container my-5 contenedor1" id="articulos">
             <h1 id="titulo1">Artículos</h1>
             <div class="row" id="resultados">
             </div>
@@ -538,7 +538,7 @@ if ((isset($_SESSION['inicioSesion']))&&($_SESSION['inicioSesion'] == true)) {
                         <p><a href="../../public/funcionamiento.html" class="text-white text-decoration-none">Cómo funciona</a></p>
                         <p><a href="../../public/normas.html" class="text-white text-decoration-none">Reglas y normas</a></p>
                         <p><a href="../../public/contacto.html" class="text-white text-decoration-none">Contacto</a></p>
-                        <p><a href="../../public/test.html" class="text-white text-decoration-none">Developers</a></p>
+
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">

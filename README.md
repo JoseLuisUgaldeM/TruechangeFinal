@@ -5,9 +5,8 @@
 3. Copiar el archivo bdtruechange.sql de la carpeta /sql en el gestor de bases de datos (bdtruechange).
 4. Activar xammp (Apache y MySql) para ejecutar el local
 5. Escribir http://localhost/TrueChange/TrueChange.php
-6. Hay 2 usuarios creados con artículos:
-   - usuario: Jose1234
-    contraseña: passw@rd1234
-
-   - usuario: Antonio1234
-     contraseña: passw@rd1234
+6. En el footer acceder a Programadores y cargar el fichero de prueba.
+    -Usuario: admin
+    -Contraseña:1234
+7. Se crearan usuarios (AnaTest , MartaTest, CarlosTest) con productos.
+8. La contraseña para todos los usuarios es: 1234
