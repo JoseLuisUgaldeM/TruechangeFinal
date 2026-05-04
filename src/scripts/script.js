@@ -252,7 +252,7 @@ function mostrarDatos(datos, contenedor, campo = null, valor = null) {
         const claseVendido = esVendido ? 'card-vendido' : '';
 
         const cardHtml = `
-<div class="col-xl-2 col-lg-3 col-sm-12 col mb-4">
+<div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 mb-4">
     <div class="card h-100 shadow-sm card-efecto border-0 ${claseVendido}">
         <div class="position-relative overflow-hidden">
             <img src="${imagen}" class="card-img-top" alt="${item.titulo}" style="height: 180px; object-fit: cover;">

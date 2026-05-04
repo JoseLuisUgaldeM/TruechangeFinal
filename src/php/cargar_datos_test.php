@@ -38,11 +38,15 @@ try {
 
     // ARTÍCULOS DE PRUEBA
    $articulos = [
-    [$ids[0], "Bicicleta de montaña", "Bicicleta en buen estado", "Bicicletas", "usado", "Patinete eléctrico", "disponible", "../imagenes/bicicleta_de_montaña.jpg"],
-    [$ids[0], "Cámara Canon", "Cámara casi nueva", "Tecnología y electrónica", "como nuevo", "Tablet", "reservado", "../imagenes/camara_canon.jpg"],
-    [$ids[1], "Chaqueta de cuero", "Chaqueta talla M", "Moda y accesorios", "usado", "Zapatillas", "disponible", "../imagenes/chaqueta_de_cuero.jpg"],
-    [$ids[1], "PlayStation 5", "Consola con mando", "Tecnología y electrónica", "como nuevo", "Nintendo Switch", "vendido", "../imagenes/play_station_5.jpg"],
-    [$ids[2], "Mesa de escritorio", "Mesa blanca grande", "Hogar y jardín", "usado", "Silla gaming", "disponible", "../imagenes/mesa_de_escritorio_blanca.jpg"]
+   [$ids[0], "Bicicleta de montaña", "Bicicleta en buen estado", "Bicicletas", "usado", "Patinete eléctrico", "disponible", "../imagenes/bicicletaDeMontaña.jpg"],
+    [$ids[0], "Cámara Canon", "Cámara casi nueva", "Tecnología y electrónica", "como nuevo", "Tablet", "reservado", "../imagenes/camaraCanon.jpg"],
+    [$ids[1], "Chaqueta de cuero", "Chaqueta talla M", "Moda y accesorios", "usado", "Zapatillas", "disponible", "../imagenes/chaquetaDeCuero.jpg"],
+    [$ids[1], "PlayStation 5", "Consola con mando", "Tecnología y electrónica", "como nuevo", "Nintendo Switch", "vendido", "../imagenes/playStation5.jpg"],
+    [$ids[2], "Mesa de escritorio", "Mesa blanca grande", "Hogar y jardín", "usado", "Silla gaming", "disponible", "../imagenes/mesaDeEscritorioBlanca.jpg"],
+    [$ids[2], "Portátil gaming", "Portátil potente para juegos", "Tecnología y electrónica", "usado", "Play Station 5", "disponible", "../imagenes/portatil.jpg"],
+    [$ids[1], "Sofá de 3 plazas", "Sofá cómodo en buen estado", "Hogar y jardín", "usado", "Estantería", "disponible", "../imagenes/sofa.jpg"],
+    [$ids[1], "Cámara réflex", "Cámara profesional con accesorios", "Tecnología y electrónica", "usado", "Guitarra", "disponible", "../imagenes/camara.jpg"],
+    [$ids[2], "Mesa de escritorio", "Mesa amplia de madera", "Hogar y jardín", "usado", "Silla gaming", "disponible", "../imagenes/mesa.jpg"]
 ];
 
 foreach ($articulos as $a) {
